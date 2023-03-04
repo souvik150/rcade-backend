@@ -58,6 +58,9 @@ export class User {
   @prop({ required: true })
   password: string;
 
+  @prop({ required: true })
+  level: string;
+
   @prop({ required: true, default: () => nanoid() })
   verificationCode: string;
 
