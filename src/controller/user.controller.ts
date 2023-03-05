@@ -138,7 +138,8 @@ export async function resetPasswordHandler(
 }
 
 export async function getCurrentUserHandler(req: Request, res: Response) {
-  return res.send(res.locals.user);
-}
+  const userId = res.locals.user;
+  const user = await findUserById(userId);
 
-// export async function updatePoints(params: type) {}
+  return res.send(user);
+}

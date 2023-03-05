@@ -10,7 +10,6 @@ import {
 import { nanoid } from "nanoid";
 import argon2 from "argon2";
 import log from "../utils/logger";
-import { ObjectId } from "mongoose";
 
 export interface GameScore {
   score: number;
@@ -50,16 +49,25 @@ export class User {
   email: string;
 
   @prop({ required: true })
-  firstName: string;
-
-  @prop({ required: true })
-  lastName: string;
+  fullName: string;
 
   @prop({ required: true })
   password: string;
 
   @prop({ required: true })
-  level: string;
+  age: number;
+
+  @prop({ required: true })
+  height: number;
+
+  @prop({ required: true })
+  weight: number;
+
+  @prop({ required: true })
+  gender: string;
+
+  @prop({ required: true })
+  physcialActivity: string;
 
   @prop({ required: true, default: () => nanoid() })
   verificationCode: string;

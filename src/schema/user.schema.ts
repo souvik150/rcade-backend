@@ -1,21 +1,30 @@
-import { array, object, string, TypeOf } from "zod";
+import { array, number, object, string, TypeOf } from "zod";
 
 export const createUserSchema = object({
   body: object({
-    firstName: string({
+    fullName: string({
       required_error: "First name is required",
     }),
-    lastName: string({
+    physcialActivity: string({
       required_error: "Last name is required",
+    }),
+    age: number({
+      required_error: "Age is required",
+    }),
+    height: number({
+      required_error: "Height is required",
+    }),
+    weight: number({
+      required_error: "Weight is required",
+    }),
+    gender: string({
+      required_error: "Gender is required",
     }),
     password: string({
       required_error: "Password is required",
     }).min(6, "Password is too short - should be min 6 chars"),
     passwordConfirmation: string({
       required_error: "Password confirmation is required",
-    }),
-    gender: string({
-      required_error: "Gender is required",
     }),
     email: string({
       required_error: "Email is required",

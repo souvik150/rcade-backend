@@ -5,9 +5,6 @@ export const createGameSchema = object({
     exercise: string({
       required_error: "Exercise is required",
     }),
-    details: string({
-      required_error: "Details is required",
-    }),
     gameId: string({
       required_error: "Game id is required",
     }),

@@ -46,25 +46,31 @@ export async function updateScoreHandler(req: Request, res: Response) {
   const id = req.params.id;
   const userId = res.locals.user;
 
+  console.log(req.body.score);
+
   try {
     const user = await UserModel.findById(userId);
-    const gameScoreIndex = user!.points.findIndex(
-      (point) => point.gameId === id
-    );
+
+    let gameScoreIndex = -1;
+    for (let i = 0; i < user!.points.length; i++) {
+      if (user!.points[i].gameId === id) {
+        gameScoreIndex = i;
+        break;
+      }
+    }
 
     if (gameScoreIndex === -1) {
       const gameScore: GameScore = {
-        score: req.body.score,
-        date: new Date(),
         gameId: id,
+        date: new Date(),
+        score: req.body.score,
       };
       user!.points.push(gameScore);
-      await user!.save();
     } else {
-      user!.points[gameScoreIndex].score += parseInt(req.body.point);
-      await user!.save();
+      user!.points[gameScoreIndex].score += req.body.score;
     }
 
+    await user!.save();
     res.status(200).json({ user });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
